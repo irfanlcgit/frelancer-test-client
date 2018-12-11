@@ -1,0 +1,74 @@
+.ant-input{
+    box-shadow: none;
+  color: #707070;
+  position: relative;
+  display: inline-block;
+  padding: 6px 12px;
+  width: 100%;
+  height: 34px;
+  font-size: 15px;
+  line-height: 1.5;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 0px;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+.ant-input:hover {
+  border-color: #d9d9d9 !important;
+  border-right-width: 1px !important;
+}
+.ant-time-picker {
+  font-family: "Monospaced Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  -webkit-transition: opacity .3s;
+  transition: opacity .3s;
+  width: 100%;
+}
+
+.ant-time-picker-input {
+  box-shadow: none;
+  color: #707070;
+  position: relative;
+  display: inline-block;
+  padding: 6px 12px;
+  width: 100%;
+  height: 34px;
+  font-size: 15px;
+  line-height: 1.5;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 0px;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+.ant-time-picker-input:hover {
+  border-color: #d9d9d9;
+  border-right-width: 1px !important;
+}
+.ant-time-picker-icon{
+  display: none !important;
+}
+.ant-time-picker-input[disabled] {
+    background-color: #ffffff;
+    opacity: 1;
+    cursor: not-allowed;
+    color: #707070;
+}
+
+.ant-time-picker-panel-clear-btn, .ant-calendar-picker-clear, .ant-calendar-picker-icon{
+  display: none !important;
+}

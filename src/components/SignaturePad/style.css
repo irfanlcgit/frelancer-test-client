@@ -1,0 +1,12 @@
+
+  .m-signature-pad--body
+  {
+    min-width: 200px;
+    height: 200px;
+    text-align: center;
+  }
+  .m-signature-pad--body
+  canvas {
+    width: 100%;
+    height: 100%;
+  }

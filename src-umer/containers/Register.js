@@ -1,0 +1,332 @@
+import React, { Component } from "react";
+//import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Auth } from "aws-amplify";
+import LoaderButton from "../components/LoaderButton";
+
+export default class Register extends Component {
+	
+	constructor(props) {
+	    super(props);
+
+	    this.state = {
+	      firstName: "",
+	      lastName: "",
+	      email: "",
+	      mobile: "",
+	      password: "",
+	      confirmPassword: "",
+	      confirmationCode: "",
+	      newUser: null,
+		  emailValid:'',
+		  phoneValid:'',
+		  passwordValid:'',
+		  errormessage:'',
+	      isLoading: false,
+	    };
+	}
+
+	validateForm() {
+	    return (
+	      this.state.email.length > 0 &&
+	      this.state.password.length > 0 &&
+	      this.state.mobile.length > 0 &&
+	      this.state.password === this.state.confirmPassword
+	    );
+	}
+
+
+	validatePassword(){
+		if(this.state.password.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/)){
+			this.setState({passwordValid:''});
+			return true;
+		}else{
+			this.setState({passwordValid:'Password must contain eight characters, at least one capital letter, one number, and a special character.'});
+			return false;
+		}
+	}
+	
+
+	validateEmail(){
+		if(this.state.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)){
+			this.setState({emailValid:''});
+			return true;
+		}else{
+			this.setState({emailValid:'Email address is invalid. Please re-check.'});
+			return false;
+		}
+	}
+	
+	validatePhone(){
+		if(this.state.mobile.match(/^\+\d+$/)){
+			this.setState({phoneValid:''});
+			return true;
+		}else{
+			this.setState({phoneValid:'Phone number is invalid'});
+			return false;
+		}
+	}
+	
+	validateConfirmationForm() {
+	    return this.state.confirmationCode.length > 0;
+	}
+
+	handleChange = event => {
+	    this.setState({
+	      [event.target.id]: event.target.value
+	    });
+	}
+
+	handleSubmit = async event => {
+	  event.preventDefault();
+	  		let validatePassword = this.validatePassword();
+	  	 	let validateEmail   = this.validateEmail();
+	  		let validatePhone  = this.validatePhone();
+		if(validatePassword && validateEmail && validatePhone ){
+			this.setState({errormessage:''});
+			this.setState({ isLoading: true });
+			try {
+				const newUser = await Auth.signUp(
+				{
+					username: this.state.email,
+					password: this.state.password,
+					attributes: {
+						email: this.state.email,
+						'phone_number':this.state.mobile,
+						'custom:firstname':this.state.firstName,
+						'custom:lastname':this.state.lastName,
+					}
+				}
+				);
+				this.setState({
+				  newUser
+				});
+				console.log(newUser);
+		  } catch (e) {
+			this.setState({errormessage:e.message});
+			//alert(e.message);
+		  }
+
+		  this.setState({ isLoading: false });
+		}	
+	  
+	}
+	
+
+	handleConfirmationSubmit = async event => {
+	  event.preventDefault();
+
+	  this.setState({ isLoading: true });
+
+	  try {
+	    await Auth.confirmSignUp(this.state.email, this.state.confirmationCode);
+	    await Auth.signIn(this.state.email, this.state.password);
+
+	    this.props.userHasAuthenticated(true);
+	    this.props.history.push("/dashboard");
+	  } catch (e) {
+	    this.setState({errormessage:e.message});
+	    this.setState({ isLoading: false });
+	  }
+	}
+	
+
+	renderConfirmationForm() {
+	    return (
+
+	      <form onSubmit={this.handleConfirmationSubmit}>
+					<div className="col-sm-12 register_bg">
+						<div className="container p0">
+							<div className="register_box">
+								<h2> VERYFY CODE </h2>
+								<div className="register_box_mid">
+									<div className="clearfix"></div>
+									
+									<div className="clear20"></div>
+									<div className="col-sm-12 p0 text-center">
+										<div className="col-sm-12 p0">
+											<input name="" id="confirmationCode" className="register_input" type="password" placeholder="Confirmation Code" value={this.state.confirmationCode} onChange={this.handleChange} />
+											<img src="images/ic_lock_outline_24px.svg" width="18px" height="16px" className="register_icon1" alt="" />
+										</div>                 
+									</div>
+									<div className="clear30"></div>
+									
+									<LoaderButton
+											block
+											bsSize="large"
+											disabled={!this.validateConfirmationForm()}
+											type="submit"
+											isLoading={this.state.isLoading}
+											text="Verify"
+											loadingText="Verifying…"
+										/>
+								</div>
+							</div>
+							<div className="clear40"></div>
+						</div>
+					</div>
+			</form>
+	    );
+	}
+
+	renderForm()
+	{
+		return (
+			<form onSubmit={this.handleSubmit}>
+				<div>
+					<div className="col-sm-12 register_bg">
+						<div className="container p0">
+							<div className="register_box">
+								<h2> SIGN UP </h2>
+								
+								<a href="/login">
+									<img src="images/ic_chevron_left1_24px.svg" className="back_signup" width="15" height="23" alt="" />
+								</a>
+								<hr />
+								<div className="register_box_mid">
+									<div className="clearfix"></div>
+									<div className="register_with_scial"> Sign up with your social account</div>
+									<div className="clear20"></div>
+									{!this.state.errormessage?(
+										''
+										):
+										(
+											<div>
+												<div className="clear10"></div>
+												<div className="alert alert-danger">{this.state.errormessage}</div>
+											</div>
+
+										)
+									}
+									{!this.state.emailValid?(
+										''
+										):
+										(
+											<div>
+												<div className="clear10"></div>
+												<div className="alert alert-danger">{this.state.emailValid}</div>
+											</div>
+
+										)
+									}
+									{!this.state.phoneValid?(
+										''
+										):
+										(
+											<div>
+												<div className="clear10"></div>
+												<div className="alert alert-danger">{this.state.phoneValid}</div>
+											</div>
+
+										)
+									}
+									{!this.state.passwordValid?(
+										''
+										):
+										(
+											<div>
+												<div className="clear10"></div>
+												<div className="alert alert-danger">{this.state.passwordValid}</div>
+											</div>
+
+										)
+									}
+									<div className="col-xs-12 register_social_icon">
+										<a href="/register"><img src="images/fb.svg" width="35" height="35" alt="" /></a>
+										<a href="/register"><img src="images/google.svg" width="33" height="36" alt="" /></a>
+										<a href="/register"><img src="images/amazon.svg" width="35" height="35" alt="" /></a>
+									</div>
+									<div className="clear20"></div>
+									<div className="strike_signup">
+										<span>or</span>
+									</div>
+									<div className="clear20"></div>
+									<div className="col-sm-12 p0 text-center">
+										<div className="col-sm-12 p0">
+											<input name="" id="firstName" className="register_input_top" type="text" placeholder="First Name" value={this.state.firstName}  onChange={this.handleChange} />
+											<img src="images/ic_person_outline_24px.svg" width="18px" height="16px" className="register_icon1" alt="" />
+										</div>
+										<div className="col-sm-12 p0">
+											<input name="" id="lastName" className="register_input" type="text" placeholder="Last Name" value={this.state.lastName} onChange={this.handleChange} />
+											<img src="images/ic_person_outline_24px.svg" width="18px" height="16px" className="register_icon1" alt="" />
+										</div>
+										<div className="col-sm-12 p0">
+											<input name="" id="email" className="register_input" type="text" placeholder="Email" value={this.state.email} onChange={this.handleChange} />
+											<img src="images/ic_mail_outline_24px.svg" width="18px" height="16px" className="register_icon1" alt="" />
+										</div>
+										<div className="col-sm-12 p0">
+											<input name="" id="mobile" className="register_input" type="text" placeholder="Mobile" value={this.state.mobile} onChange={this.handleChange} />
+											<img src="images/ic_phone_24px.svg" width="18px" height="16px" className="register_icon1"  alt="" />
+										</div>
+										<div className="col-sm-12 p0">
+											<input name="" id="password" className="register_input" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
+											<img src="images/ic_lock_outline_24px.svg" width="18px" height="16px" className="register_icon1" alt="" />
+										</div>
+										<div className="col-sm-12 p0">
+											<input name="" id="confirmPassword" className="register_input_bottom" type="password" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange} />
+											<img src="images/ic_lock_outline_24px.svg" width="18px" height="16px" className="register_icon1" alt="" />
+										</div>                  
+									</div>
+									<div className="clear30"></div>
+									{/*<a href="" className="btn_register" data-toggle="modal" data-target="#exampleModalCenter">
+										Create New Account
+									</a>*/}
+									<LoaderButton
+											block
+											bsSize="large"
+											
+											type="submit"
+											isLoading={this.state.isLoading}
+											text="Signup"
+											loadingText="Signing up…"
+											className="btn_register"
+										/>
+									<div className="clear10"></div>
+									<div className="col-xs-12 p0 text-right lable_already_user">
+										Already user?
+										<a href="/login">Click here</a>
+									</div>
+									<div className="clear20"></div>
+									<div className="col-sm-12 text-center register">
+										I accept the <strong>Terms of Use</strong> and <strong>Privacy Policy</strong>
+									</div>
+									<div className="clearfix"></div>
+								</div>
+							</div>
+							<div className="clear40"></div>
+						</div>
+					</div>
+					<div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div className="modal-dialog modal-dialog-centered modla_register" role="document">
+							<div className="modal-content">
+								<div className="modal-header modal_header_register">
+									<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div className="modal-body register_suc register_popup">
+									<img src="images/ic_check_circle_24px.svg" width="47" height="47" alt="" />
+									<div className="clearfix"></div>
+									<h2> You have signed up successfully</h2>
+									<div className="clearfix"></div>
+									Thank you for chossing Digital Form.
+									<div className="clear40"></div>
+									<a href="/" className="btn_ok_reg">OK</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		);
+	}
+
+	render() {
+    return (
+	      <div className="Signup">
+	        {this.state.newUser === null
+	          ? this.renderForm()
+	          : this.renderConfirmationForm()}
+	      </div>
+	    );
+	}
+}

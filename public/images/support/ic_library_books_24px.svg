@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-7569 11420 120 120">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #357aae;
+      }
+    </style>
+  </defs>
+  <path id="ic_library_books_24px" class="cls-1" d="M14,26H2v84a12.035,12.035,0,0,0,12,12H98V110H14ZM110,2H38A12.035,12.035,0,0,0,26,14V86A12.035,12.035,0,0,0,38,98h72a12.035,12.035,0,0,0,12-12V14A12.035,12.035,0,0,0,110,2Zm-6,54H44V44h60ZM80,80H44V68H80Zm24-48H44V20h60Z" transform="translate(-7571 11418)"/>
+</svg>

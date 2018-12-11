@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-13740.506 1460 18.114 16">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #858789;
+      }
+    </style>
+  </defs>
+  <path id="ic_mail_outline_24px" class="cls-1" d="M18.3,4H3.811a1.911,1.911,0,0,0-1.8,2L2,18a1.918,1.918,0,0,0,1.811,2H18.3a1.918,1.918,0,0,0,1.811-2V6A1.918,1.918,0,0,0,18.3,4Zm0,14H3.811V8l7.246,5L18.3,8Zm-7.246-7L3.811,6H18.3Z" transform="translate(-13742.506 1456)"/>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="34 200 20 16.364">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #03599a;
+      }
+    </style>
+  </defs>
+  <path id="ic_picture_in_picture_alt_24px" class="cls-1" d="M17.364,10.273H10.091v5.455h7.273ZM21,17.545V4.8A1.808,1.808,0,0,0,19.182,3H2.818A1.808,1.808,0,0,0,1,4.8V17.545a1.824,1.824,0,0,0,1.818,1.818H19.182A1.824,1.824,0,0,0,21,17.545Zm-1.818.018H2.818V4.791H19.182Z" transform="translate(33 197)"/>
+</svg>
