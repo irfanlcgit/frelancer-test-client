@@ -6,6 +6,7 @@ import SocialButtonLWA from '../components/SocialButtonLWA';
 import SocialButtonFb from '../components/SocialButtonFb';
 import SocialButtonG from '../components/SocialButtonG';
 import MediaQuery from 'react-responsive';
+import config from "../config";
 //import FacebookLogin from 'react-facebook-login';
 //import "./Login.css";
 //import AWS from "aws-sdk";
@@ -407,7 +408,7 @@ export default class Login extends Component {
 										{/*<a href="/"></a>*/}
 										<SocialButtonFb
 											  provider='facebook'
-											  appId='2200810566907729'
+											  appId={config.facebookAppId}
 											  onLoginSuccess={handleSocialLogin}
 											  onLoginFailure={handleSocialLoginFailure}
 											>
@@ -418,7 +419,7 @@ export default class Login extends Component {
 										{/*<a href="/"></a>*/}
 										<SocialButtonG
 										  provider='google'
-										  appId='679345444938-bjpk976597lke4aveus0dvvo7h3qrrsg.apps.googleusercontent.com'
+										  appId={config.googleAppId}
 										  onLoginSuccess={handleSocialLogin}
 										  onLoginFailure={handleSocialLoginFailure}
 										>
@@ -429,7 +430,7 @@ export default class Login extends Component {
 										{/*<a href="/"></a>*/}
 										<SocialButtonLWA
 											  provider='amazon'
-											  appId='amzn1.application-oa2-client.abf13a4e5dcb4b958120b1eb7a1558fb'
+											  appId={config.awsAppId}
 											  onLoginSuccess={handleSocialLogin}
 											  onLoginFailure={handleSocialLoginFailure}
 											>
@@ -513,7 +514,7 @@ export default class Login extends Component {
 								{/*<a href="/"><img src="images/fb.svg" width="35" height="35" alt="" /></a>*/}
 								<SocialButtonFb
 											  provider='facebook'
-											  appId='2200810566907729'
+											  appId={config.facebookAppId}
 											  onLoginSuccess={handleSocialLogin}
 											  onLoginFailure={handleSocialLoginFailure}
 											>
@@ -524,7 +525,7 @@ export default class Login extends Component {
 								{/*<a href="/"><img src="images/google.svg" width="33" height="36" alt="" /></a>*/}
 								<SocialButtonG
 									  provider='google'
-									  appId='679345444938-bjpk976597lke4aveus0dvvo7h3qrrsg.apps.googleusercontent.com'
+									  appId={config.googleAppId}
 									  onLoginSuccess={handleSocialLogin}
 									  onLoginFailure={handleSocialLoginFailure}
 									>
@@ -535,7 +536,7 @@ export default class Login extends Component {
 								{/*<a href="/"><img src="images/amazon.svg" width="35" height="35" alt="" /></a>*/}
 								<SocialButtonLWA
 								  provider='amazon'
-								  appId='amzn1.application-oa2-client.abf13a4e5dcb4b958120b1eb7a1558fb'
+								  appId={config.awsAppId}
 								  onLoginSuccess={handleSocialLogin}
 								  onLoginFailure={handleSocialLoginFailure}
 								>

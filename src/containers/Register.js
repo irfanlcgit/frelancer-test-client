@@ -5,6 +5,7 @@ import SocialButtonLWA from '../components/SocialButtonLWA';
 import SocialButtonFb from '../components/SocialButtonFb';
 import SocialButtonG from '../components/SocialButtonG';
 import CountryCode from '../components/CountryCode';
+import config from "../config";
 
 const handleSocialLogin = (response) => {
 	
@@ -415,7 +416,7 @@ export default class Register extends Component
 									{/*<a href="/register"><img src="images/fb.svg" width="35" height="35" alt="" /></a>*/}
 									<SocialButtonFb
 									  provider='facebook'
-									  appId='2200810566907729'
+									  appId={config.facebookAppId}
 									  onLoginSuccess={handleSocialLogin}
 									  onLoginFailure={handleSocialLoginFailure}
 									>
@@ -424,7 +425,7 @@ export default class Register extends Component
 									{/*<a href="/register"><img src="images/google.svg" width="33" height="36" alt="" /></a>*/}
 									<SocialButtonG
 									  provider='google'
-									  appId='679345444938-bjpk976597lke4aveus0dvvo7h3qrrsg.apps.googleusercontent.com'
+									  appId={config.googleAppId}
 									  onLoginSuccess={handleSocialLogin}
 									  onLoginFailure={handleSocialLoginFailure}
 									>
@@ -433,7 +434,7 @@ export default class Register extends Component
 									{/*<a href="/register"><img src="images/amazon.svg" width="35" height="35" alt="" /></a>*/}
 									<SocialButtonLWA
 								  provider='amazon'
-								  appId='amzn1.application-oa2-client.278696a9f4714d7a898d7d1d4ffa4af4'
+								  appId={config.awsAppId}
 								  onLoginSuccess={handleSocialLogin}
 								  onLoginFailure={handleSocialLoginFailure}
 								>
