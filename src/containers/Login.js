@@ -349,7 +349,7 @@ export default class Login extends Component {
 							</div>
 							<div className="col-sm-6 col-md-4 col-md-offset-1 p0">
 								<div className="login_box">
-									<h2><img src="images/login.png" alt="" /> Log in</h2>
+									<h2><img src="images/login.png" alt="" /> Log in irfan</h2>
 									<div className="clear20"></div>
 									{!this.state.errormessage?(
 											''
