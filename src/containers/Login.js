@@ -110,7 +110,7 @@ export default class Login extends Component {
 			confirmationCode: "",
 			isLoading: false,
 			errormessage:"",
-			newUser: null
+			newUser: null,
 		};
 		this.validateForm = this.validateForm.bind(this);
 	}
@@ -162,7 +162,7 @@ export default class Login extends Component {
 	                        "LastName": userData['custom:lastname'],
 	                        "EmailAddress": userData.email,
 	                        "MobileNumber": userData.phone_number,
-	                        "Password": this.state.password,
+	                        "Password": thisObj.state.password,
 	                    }
 	             
 	                });

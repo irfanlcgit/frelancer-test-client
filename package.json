@@ -25,9 +25,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "predeploy": "npm run build",
-    "deploy": "aws s3 sync build/ s3://freelance-portal-client --delete",
-    "postdeploy": "aws cloudfront create-invalidation --distribution-id E1DJJBAQZKQG8T --paths '/*'",
     "eject": "react-scripts eject"
   }
 }

@@ -218,8 +218,8 @@ export default class Register extends Component
 					attributes: {
 						email: this.state.email,
 						'phone_number':"+"+document.getElementById("phoneDropDown").value+this.state.mobile,//this.state.mobile,
-						'custom:firstname':this.state.firstName,
-						'custom:lastname':this.state.lastName,
+						//'custom:firstname':this.state.firstName,
+						//'custom:lastname':this.state.lastName,
 					}
 				});
 				this.setState(
